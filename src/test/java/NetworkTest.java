@@ -7,11 +7,13 @@ public class NetworkTest {
 
     Network network;
     Computer computer;
+    InternetRadio internetRadio;
 
     @Before
     public void before() {
         network = new Network("CodeClan");
         computer = new Computer("Keith's Desktop", "Apple", "Macbook Pro");
+        internetRadio = new InternetRadio();
     }
 
     @Test
@@ -27,6 +29,12 @@ public class NetworkTest {
     @Test
     public void canConnectDesktop() {
         network.connect(computer);
+        assertEquals(1, network.deviceCount());
+    }
+
+    @Test
+    public void canConnectInternetRadio() {
+        network.connect(internetRadio);
         assertEquals(1, network.deviceCount());
     }
 
