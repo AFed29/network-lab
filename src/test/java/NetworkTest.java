@@ -11,7 +11,7 @@ public class NetworkTest {
 
     @Before
     public void before() {
-        network = new Network("CodeClan");
+        network = new Network("CodeClan", 10);
         computer = new Computer("Keith's Desktop", "Apple", "Macbook Pro");
         internetRadio = new InternetRadio();
     }
@@ -43,5 +43,26 @@ public class NetworkTest {
         network.connect(computer);
         network.disconnectAll();
         assertEquals(0, network.deviceCount());
+    }
+
+
+    @Test
+    public void hasCapcity(){
+        assertEquals(10, network.getCapacity());
+    }
+
+    @Test
+    public void canGetFreeSlots(){
+        network.connect(computer);
+        network.connect(internetRadio);
+        assertEquals(8,network.freeSlots());
+    }
+
+    @Test
+    public void cannotConnectIfNoFreeSlots (){
+        for (int i = 0; i < 15 ; i++) {
+            network.connect(computer);
+        }
+        assertEquals(10, network.deviceCount());
     }
 }

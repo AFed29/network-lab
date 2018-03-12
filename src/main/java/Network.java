@@ -3,10 +3,12 @@ import java.util.*;
 public class Network {
     private String name;
     private ArrayList<IConnect> devices;
+    private int capacity;
 
-    public Network(String name){
+    public Network(String name, int capacity){
         this.devices = new ArrayList<>();
         this.name = name;
+        this.capacity = capacity;
     }
 
     public String getName(){
@@ -18,10 +20,20 @@ public class Network {
     }
 
     public void connect(IConnect device){
-        devices.add(device);
+        if (freeSlots() > 0) {
+            devices.add(device);
+        }
     }
 
     public void disconnectAll(){
         devices.clear();
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int freeSlots() {
+        return capacity - deviceCount();
     }
 }
